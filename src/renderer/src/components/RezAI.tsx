@@ -17,7 +17,7 @@ const RezAI = () => {
       <div
         className={`absolute top-[-10%] left-[-10%] w-125 h-125 bg-cyan-500/20 rounded-full blur-[120px] transition-all duration-1000 ${isLive ? 'opacity-100 scale-110' : 'opacity-40 scale-100'}`}
       ></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-125 h-125 bg-purple-500/10 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-125 h-125 bg-sky-500/10 rounded-full blur-[120px]"></div>
 
       {/* --- MAIN CONTENT --- */}
       <div className="relative z-10 h-[calc(100vh-100px)] w-full flex items-center justify-center flex-col gap-8">
@@ -40,7 +40,7 @@ const RezAI = () => {
             {/* The Inner "Core" linear */}
             <div
               className={`absolute inset-4 rounded-full opacity-60 bg-linear-to-tr 
-              ${isLive ? 'from-cyan-600/20 via-transparent to-purple-600/20' : 'from-gray-700/10 via-transparent to-gray-800/10'}`}
+              ${isLive ? 'from-cyan-600/20 via-transparent to-cyan-600/20' : 'from-gray-700/10 via-transparent to-gray-800/10'}`}
             ></div>
 
             {/* Reflection / Shine (Makes it look glass) */}
@@ -52,13 +52,13 @@ const RezAI = () => {
                 className={`text-4xl font-black tracking-widest transition-colors duration-500 
                 ${isLive ? 'text-cyan-100 drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]' : 'text-gray-600'}`}
               >
-                REZ
+                REZ AI
               </span>
               <span
                 className={`text-xs font-mono tracking-[0.3em] uppercase transition-colors duration-500
                  ${isLive ? 'text-cyan-400' : 'text-gray-700'}`}
               >
-                {isLive ? 'Online' : 'Standby'}
+                {isLive ? 'Online' : 'Offline'}
               </span>
             </div>
           </div>
@@ -71,7 +71,7 @@ const RezAI = () => {
             className={`text-sm font-mono tracking-wider transition-all duration-500
              ${isLive ? 'text-cyan-400 animate-pulse' : 'text-gray-500'}`}
           >
-            {isLive ? '/// LISTENING FOR INPUT ///' : '/// REZ AI IS STANDBY///'}
+            {isLive ? '/// LISTENING FOR INPUT ///' : '/// REZ AI IS OFFLINE ///'}
           </p>
         </div>
       </div>
@@ -87,7 +87,7 @@ const RezAI = () => {
           {/* MAIN TOGGLE: Start / Stop */}
           <button
             onClick={() => setIsLive(!isLive)}
-            className={`flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg transform active:scale-95
+            className={`cursor-pointer flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg transform active:scale-95
             ${
               isLive
                 ? 'bg-red-500/10 text-red-400 border border-red-500/50 hover:bg-red-500 hover:text-white shadow-red-900/20'
@@ -95,7 +95,7 @@ const RezAI = () => {
             }`}
           >
             {isLive ? <FaStop className="w-5 h-5" /> : <FaPlay className="w-5 h-5 ml-1" />}
-            {isLive ? 'END SESSION' : 'INITIALIZE'}
+            {isLive ? 'END' : 'START'}
           </button>
 
           {/* Mute Button (Right) */}
@@ -107,8 +107,8 @@ const RezAI = () => {
               !isLive
                 ? 'opacity-30 cursor-not-allowed text-gray-500'
                 : isMuted
-                  ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500 hover:text-black'
-                  : 'text-gray-300 hover:text-white hover:bg-white/10'
+                  ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500 hover:text-black cursor-pointer'
+                  : 'text-gray-300 hover:text-white hover:bg-white/10 cursor-pointer'
             }`}
           >
             {isMuted ? (
