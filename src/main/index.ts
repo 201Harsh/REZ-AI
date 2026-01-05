@@ -2,6 +2,9 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { RezEngine } from './logic/RezAI'
+
+const rez = new RezEngine(process.env.GEMINI_API_KEY || 'AIzaSyCfnvrDMNbv_RVsY7xGm__e3kFTfVqZYc0')
 
 function createWindow(): void {
   // Create the browser window.
@@ -19,6 +22,34 @@ function createWindow(): void {
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
+  })
+
+  ipcMain.handle('ai:toggle-session', async (event, shouldConnect: boolean) => {
+    if (shouldConnect) {
+      const webContents = event.sender
+
+      const success = await rez.connect(
+        // Status Callback
+        (status) => {
+          webContents.send('status:update', status)
+        },
+        // Audio Level Callback (New!)
+        (level) => {
+          webContents.send('audio:visualize', level)
+        }
+      )
+      return success
+    } else {
+      rez.disconnect()
+      event.sender.send('status:update', 'OFFLINE')
+      return false
+    }
+  })
+
+  // 2. MIC TOGGLE (Mute / Unmute)
+  ipcMain.handle('audio:toggle-mute', (event, isMuted: boolean) => {
+    console.log(event)
+    return rez.toggleMute(isMuted)
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {

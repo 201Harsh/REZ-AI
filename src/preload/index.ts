@@ -1,12 +1,19 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
 const api = {}
 
-// Use `contextBridge` APIs to expose Electron APIs to
-// renderer only if context isolation is enabled, otherwise
-// just add to the DOM global.
+contextBridge.exposeInMainWorld('rezAPI', {
+  toggleSession: (isActive: boolean) => ipcRenderer.invoke('ai:toggle-session', isActive),
+  toggleMute: (isMuted: boolean) => ipcRenderer.invoke('audio:toggle-mute', isMuted),
+  onStatus: (callback: (status: string) => void) =>
+    ipcRenderer.on('status:update', (_e, status) => callback(status)),
+  // New Visualizer Listener
+  onVisualize: (callback: (level: number) => void) =>
+    ipcRenderer.on('audio:visualize', (_e, level) => callback(level))
+})
+
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)
