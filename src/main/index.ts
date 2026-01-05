@@ -3,8 +3,9 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { RezEngine } from './logic/RezAI'
+import 'dotenv/config'
 
-const rez = new RezEngine(process.env.GEMINI_API_KEY || 'AIzaSyCfnvrDMNbv_RVsY7xGm__e3kFTfVqZYc0')
+const rez = new RezEngine(process.env.MAIN_VITE_KEY || '')
 
 function createWindow(): void {
   // Create the browser window.
