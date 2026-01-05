@@ -29,7 +29,7 @@ const App = () => {
             {/* Logo/Title with glow effect */}
             <div className="text-center">
               <h1 className="text-7xl font-bold tracking-tighter mb-2">
-                <span className="bg-linear-to-r from-cyan-400 via-sky-500 to-emerald-500 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-cyan-500 via-sky-300 to-sky-700 bg-clip-text text-transparent">
                   REZ AI
                 </span>
               </h1>
@@ -46,14 +46,14 @@ const App = () => {
 
             {/* Connect Button */}
             <button
-              className="group relative px-16 py-5 bg-linear-to-r from-cyan-600 to-blue-700 rounded-xl text-xl font-bold tracking-wider transition-all duration-300 cursor-pointer overflow-hidden"
+              className="group relative px-16 py-5 bg-linear-to-r from-cyan-600 to-sky-700 rounded-xl text-xl font-bold tracking-wider transition-all duration-300 cursor-pointer overflow-hidden"
               onClick={() => setisConnected(true)}
             >
               {/* Button glow effect */}
-              <div className="absolute inset-0 bg-linear-to-r from-cyan-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+              <div className="absolute inset-0 bg-linear-to-r from-cyan-500 to-sky-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
 
               {/* Button border glow */}
-              <div className="absolute -inset-1 bg-linear-to-r from-cyan-400 to-blue-500 rounded-xl blur opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+              <div className="absolute -inset-1 bg-linear-to-r from-cyan-400 to-sky-500 rounded-xl blur opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
 
               {/* Button content */}
               <span className="relative flex items-center gap-3">
